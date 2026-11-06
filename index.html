@@ -1,0 +1,1975 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no,viewport-fit=cover"><meta name="theme-color" content="#080c11"><title>Zombie Simulator: Son Gece</title><style>*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#080c11;color:#f0f3f5;font-family:Arial,Helvetica,sans-serif;user-select:none;-webkit-user-select:none}button{font:inherit;color:inherit;cursor:pointer;touch-action:manipulation;border:1px solid #60727b;background:#1a2933;border-radius:7px;padding:12px 17px;transition:background .18s,transform .18s}button:active{transform:scale(.96)}button:hover{background:#344b57}button:disabled{opacity:.35;cursor:not-allowed}#app,#game{position:absolute;inset:0;width:100%;height:100%}#game{display:block;touch-action:none}#vignette{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at center,transparent 42%,#0009 100%)}.hidden{display:none!important}.screen{position:absolute;inset:0;z-index:15;background:linear-gradient(130deg,#071018f5,#0c1016f7);display:flex;justify-content:center;align-items:center;overflow-y:auto;padding:18px}.panel{width:min(480px,95vw);background:#0d1822f0;border:1px solid #435461;padding:30px;box-shadow:0 25px 80px #000a;border-radius:12px;max-height:95vh;overflow:auto}.panel.wide{width:min(940px,96vw)}.panel h2{font-size:clamp(23px,4vw,38px);margin:8px 0 20px;letter-spacing:2px}.panel p{line-height:1.6;color:#c2ced3}.panel button{display:block;width:100%;margin:10px 0}.panel label{display:block;padding:12px 0}.eyebrow{font-size:11px;letter-spacing:4px;color:#b9b3a1;font-weight:bold}.primary{background:#8b2d30;border-color:#b84c4d;font-weight:bold;letter-spacing:2px}.primary:hover{background:#a73c40}#menu{justify-content:flex-start;background:linear-gradient(90deg,#060b11 0%,#060b11ee 33%,#07121b44 100%);overflow:hidden}.menuart{position:absolute;inset:0;overflow:hidden;background:linear-gradient(#07111f,#26313b 70%,#0b1118)}.menuart:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#04080de8,#06101b65 75%,#03070cb8)}.moon,.cinemaMoon{position:absolute;right:18%;top:12%;width:85px;height:85px;border-radius:50%;background:#cad0c5;box-shadow:0 0 80px #b5c7c488}.city{position:absolute;bottom:0;left:0;width:100%;height:65%;background:repeating-linear-gradient(90deg,#0c1721 0 55px,transparent 55px 80px,#14202a 80px 150px,transparent 150px 185px);clip-path:polygon(0 25%,9% 25%,9% 0,18% 0,18% 34%,30% 34%,30% 14%,39% 14%,39% 42%,51% 42%,51% 9%,61% 9%,61% 35%,73% 35%,73% 18%,84% 18%,84% 40%,100% 40%,100% 100%,0 100%)}.cityback{opacity:.5;transform:translateY(-8%) scale(1.1)}.cityfront{background:#090f17;height:40%;opacity:.95}.walker{position:absolute;bottom:12%;width:32px;height:90px;border-radius:45% 45% 10% 10%;background:#050a0e;box-shadow:0 0 15px #000;animation:sway 3s ease-in-out infinite alternate}.walker:before{content:"";position:absolute;top:-22px;left:5px;width:24px;height:24px;background:#060a0e;border-radius:50%;box-shadow:5px 9px 4px -6px #ef4444}.walker1{right:19%}.walker2{right:32%;transform:scale(.7);animation-delay:1.3s}.lightning,.cinemaFlash{position:absolute;inset:0;background:#c2d7ff;opacity:0;animation:flash 10s infinite}.menucontent{z-index:2;position:relative;width:min(600px,100%);padding-left:clamp(8px,4vw,75px);animation:appear 1.5s ease-out}.menucontent h1{font-size:clamp(38px,7vw,88px);line-height:.91;margin:22px 0 0;letter-spacing:-2px;text-shadow:0 7px 25px #000}.menucontent h1 span{display:block;color:#bfc7c9}.menucontent h2{color:#d04446;font-size:clamp(35px,6vw,74px);letter-spacing:9px;margin:4px 0 20px;text-shadow:0 0 30px #8c222299}.menucontent p{color:#b8c3c9;margin:0 0 30px}.menubuttons{width:min(300px,100%);display:grid;gap:9px}.menubuttons button{text-align:left;font-size:13px;letter-spacing:1px;font-weight:bold}.credit{display:block;margin-top:22px;max-width:380px;line-height:1.5;color:#8f9ca5;font-size:11px}#chapterGrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.chapterTile{text-align:left;min-height:100px;padding:15px}.chapterTile strong{display:block;color:#e4c58b;margin:8px 0}.chapterTile small{color:#b2bec5}.chapterTile .num{color:#de7777;font-size:12px}#hud{position:absolute;z-index:5;top:0;left:0;right:0;padding:15px 18px;display:flex;justify-content:space-between;pointer-events:none;text-shadow:0 2px 5px #000}.hudleft{width:min(310px,48vw)}.hudleft b{font-size:12px;letter-spacing:1px}.health{height:11px;border:1px solid #eee8;margin:8px 0;background:#280b10;border-radius:8px;overflow:hidden}#healthFill{height:100%;width:100%;background:linear-gradient(90deg,#a71f31,#e55753)}#stats{font-size:11px}#objective{position:absolute;top:15px;left:50%;transform:translateX(-50%);text-align:center;width:45%;font-size:13px;font-weight:bold;color:#f0d9a2}#progress{position:absolute;top:37px;left:50%;transform:translateX(-50%);font-size:11px;color:#c6d1d7}#pauseButton{pointer-events:auto;font-size:18px;padding:8px 15px}#toast{position:absolute;z-index:7;top:25%;left:50%;transform:translateX(-50%);background:#08141de8;border:1px solid #627d8d;padding:12px 20px;border-radius:7px;text-align:center;max-width:85vw}#interactHint{position:absolute;z-index:6;bottom:16%;left:50%;transform:translateX(-50%);font-size:12px;background:#111b24c9;padding:8px 13px;border-radius:5px}#touch{position:absolute;inset:0;z-index:8;pointer-events:none}#joystick{position:absolute;bottom:clamp(20px,8vh,70px);left:clamp(20px,5vw,60px);width:125px;height:125px;border-radius:50%;background:#7d9aa22b;border:2px solid #c3d3da66;pointer-events:auto;touch-action:none}#knob{position:absolute;left:50%;top:50%;width:55px;height:55px;border-radius:50%;transform:translate(-50%,-50%);background:#b4c9d477;border:2px solid #dbe8ee88;pointer-events:none}.touchbuttons{position:absolute;bottom:clamp(16px,7vh,60px);right:clamp(12px,4vw,45px);display:grid;grid-template-columns:repeat(2,65px);gap:10px;pointer-events:auto}.touchbuttons button{width:65px;height:60px;padding:0;font-weight:bold;font-size:12px;border-radius:50%;background:#2b4148bb;touch-action:none}#fireButton{background:#a33b40cc;border-color:#ef7e80}#healButton{background:#2b715bbb}#cutscene{position:absolute;inset:0;z-index:30;background:#070c12;overflow:hidden;touch-action:manipulation}.cinemaBackdrop{position:absolute;inset:0;background:linear-gradient(#08111c,#32434c 70%,#0b1016);animation:cinemaPan 11s ease-in-out infinite alternate}.cinemaMoon{top:17%}.cinemaSkyline{position:absolute;bottom:0;width:100%;height:58%;background:#0a111a;clip-path:polygon(0 48%,10% 48%,10% 8%,22% 8%,22% 54%,35% 54%,35% 18%,48% 18%,48% 48%,61% 48%,61% 0,74% 0,74% 45%,87% 45%,87% 20%,100% 20%,100% 100%,0 100%)}.cinemaFigure{position:absolute;bottom:14%;left:48%;height:95px;width:33px;border-radius:40% 40% 12% 12%;background:linear-gradient(#2e6989 0 60%,#18232f 60%);box-shadow:0 0 30px #000;animation:sway 2s ease-in-out infinite alternate}.letterbox{position:absolute;left:0;right:0;height:11%;background:#000;z-index:2}.letterbox.top{top:0}.letterbox.bottom{bottom:0}.cinemaCaption{position:absolute;bottom:14%;left:10%;width:80%;z-index:3;text-shadow:0 3px 8px #000}.cinemaCaption #cinemaSpeaker{color:#f4d193;font-size:13px;letter-spacing:3px;font-weight:bold}.cinemaCaption #cinemaText{font-size:clamp(17px,3vw,29px);line-height:1.4;margin-top:9px;min-height:48px}.cinemaHelp{font-size:10px;letter-spacing:2px;color:#aebdc7;margin-top:14px}#skipButton{position:absolute;right:18px;top:14%;z-index:4;font-size:12px;background:#182c3cb9}@keyframes sway{from{transform:rotate(-3deg) translateY(0)}to{transform:rotate(4deg) translateY(3px)}}@keyframes flash{0%,47%,49%,52%,100%{opacity:0}48%,50%{opacity:.32}}@keyframes appear{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}@keyframes cinemaPan{from{transform:scale(1)}to{transform:scale(1.12) translateX(-2%)}}@media(pointer:fine){#touch{display:none!important}}@media(pointer:coarse){#touch:not(.hidden){display:block}#interactHint{bottom:22%}}@media(max-width:680px){.menucontent{padding:8px}.menucontent h1{font-size:clamp(36px,9vw,60px)}.menucontent h2{font-size:clamp(34px,8vw,55px);letter-spacing:5px}.menubuttons{width:245px}.menubuttons button{padding:9px 12px}.credit{font-size:9px}.panel{padding:18px}#chapterGrid{grid-template-columns:repeat(2,1fr)}.chapterTile{min-height:75px;padding:10px}.chapterTile strong{font-size:12px}#objective{top:60px;width:80%;font-size:11px}#progress{top:80px}.hudleft{width:45vw}#joystick{width:105px;height:105px}.touchbuttons{grid-template-columns:repeat(2,54px);gap:7px}.touchbuttons button{width:54px;height:53px;font-size:10px}}@media(max-height:480px){.menucontent h1{font-size:40px}.menucontent h2{font-size:34px;margin-bottom:8px}.menucontent p{margin-bottom:10px}.menubuttons{grid-template-columns:repeat(2,1fr);width:390px}.menubuttons button{padding:8px}.credit{margin-top:10px}#joystick{bottom:15px}.touchbuttons{bottom:12px}.cinemaCaption{bottom:12%}}
+</style></head><body>
+<main id="app"><canvas id="game"></canvas><div id="vignette"></div><div id="rain"></div>
+<header id="hud" class="hidden"><div class="hudleft"><b id="chapterName">BÖLÜM 1</b><div class="health"><div id="healthFill"></div></div><small id="stats">100 CAN · 24 MERMİ · 1 İLK YARDIM</small></div><div class="hudright"><button id="pauseButton" class="iconbutton">Ⅱ</button></div><div id="objective">Görev yükleniyor...</div><div id="progress"></div></header>
+<div id="toast" class="hidden"></div><div id="interactHint" class="hidden">E · ETKİLEŞİM</div>
+<div id="touch" class="hidden"><div id="joystick"><div id="knob"></div></div><div class="touchbuttons"><button id="healButton">✚</button><button id="runButton">KOŞ</button><button id="useButton">EL</button><button id="fireButton">ATEŞ</button></div></div>
+<section id="menu" class="screen"><div class="menuart"><div class="moon"></div><div class="city cityback"></div><div class="city cityfront"></div><div class="walker walker1"></div><div class="walker walker2"></div><div class="lightning"></div></div><div class="menucontent"><div class="eyebrow">2032 · SALGININ BAŞLANGICI</div><h1>ZOMBIE <span>SIMULATOR</span></h1><h2>SON GECE</h2><p>Hayatta kal. Gerçeği öğren. Son kararını ver.</p><div class="menubuttons"><button id="newButton" class="primary">▶ YENİ OYUN</button><button id="continueButton">↻ DEVAM ET</button><button id="chaptersButton">▦ BÖLÜMLER</button><button id="settingsButton">⚙ AYARLAR</button><button id="helpButton">? NASIL OYNANIR</button></div><small class="credit">Bu oyun Emre Çavuş tarafından deneme ve geliştirme üzerine kurulmuştur.</small></div></section>
+<section id="chapters" class="screen hidden"><div class="panel wide"><div class="eyebrow">HİKÂYE MODU · SEZON 1</div><h2>12 BÖLÜM</h2><div id="chapterGrid"></div><button class="back" data-back>← GERİ</button></div></section>
+<section id="settings" class="screen hidden"><div class="panel"><h2>AYARLAR</h2><label><input id="soundToggle" type="checkbox" checked> Ses efektleri</label><label><input id="shakeToggle" type="checkbox" checked> Ekran sarsıntısı</label><label><input id="rainToggle" type="checkbox" checked> Yağmur efekti</label><button class="back" data-back>← GERİ</button></div></section>
+<section id="help" class="screen hidden"><div class="panel"><h2>NASIL OYNANIR?</h2><p><b>PC:</b> WASD / ok tuşları hareket · Fareyle nişan · Sol tık ateş · E etkileşim · Shift koş · H iyileş · Esc duraklat.</p><p><b>Telefon:</b> Sol joystick ile yürü, sağdaki ATEŞ / EL / KOŞ / ✚ tuşlarını kullan. Ateş ederken otomatik nişan alınır.</p><p>Parlayan eşyaları topla, görevleri sırayla tamamla, çıkışa ulaş. Her bölümden sonra ilerlemen kaydedilir.</p><button class="back" data-back>← GERİ</button></div></section>
+<section id="pause" class="screen hidden"><div class="panel"><div class="eyebrow">OYUN DURAKLATILDI</div><h2>SON GECE</h2><button id="resumeButton" class="primary">▶ DEVAM</button><button id="saveButton">KAYDET</button><button id="menuButton">ANA MENÜ</button></div></section>
+<section id="ending" class="screen hidden"><div class="panel"><div class="eyebrow" id="endingLabel">BÖLÜM TAMAMLANDI</div><h2 id="endingTitle">Başardın</h2><p id="endingText"></p><button id="endingButton" class="primary">DEVAM ET</button><button id="endingMenuButton">ANA MENÜ</button></div></section>
+<section id="cutscene" class="hidden"><div class="cinemaBackdrop"><div class="cinemaMoon"></div><div class="cinemaSkyline"></div><div class="cinemaFigure"></div><div class="cinemaFlash"></div></div><div class="letterbox top"></div><div class="letterbox bottom"></div><div class="cinemaCaption"><div id="cinemaSpeaker"></div><div id="cinemaText"></div><div class="cinemaHelp">DEVAM ETMEK İÇİN DOKUN / ENTER</div></div><button id="skipButton">ATLA »</button></section>
+</main><script>window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[0] = {
+  "id": 1,
+  "name": "Uyanış",
+  "theme": "hospital",
+  "palette": "#34444c",
+  "objective": "Hastane hasta kayıtlarını bul",
+  "walls": [
+    {
+      "x": 320,
+      "y": 90,
+      "w": 90,
+      "h": 230
+    },
+    {
+      "x": 320,
+      "y": 840,
+      "w": 90,
+      "h": 260
+    },
+    {
+      "x": 620,
+      "y": 160,
+      "w": 150,
+      "h": 95
+    },
+    {
+      "x": 620,
+      "y": 890,
+      "w": 150,
+      "h": 90
+    },
+    {
+      "x": 990,
+      "y": 110,
+      "w": 120,
+      "h": 190
+    },
+    {
+      "x": 1050,
+      "y": 840,
+      "w": 120,
+      "h": 150
+    },
+    {
+      "x": 1430,
+      "y": 160,
+      "w": 90,
+      "h": 250
+    }
+  ],
+  "quest": {
+    "x": 1300,
+    "y": 510
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 520,
+      "y": 180,
+      "type": "runner"
+    },
+    {
+      "x": 713,
+      "y": 403,
+      "type": "walker"
+    },
+    {
+      "x": 906,
+      "y": 626,
+      "type": "walker"
+    },
+    {
+      "x": 1099,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1292,
+      "y": 292,
+      "type": "walker"
+    },
+    {
+      "x": 1485,
+      "y": 515,
+      "type": "runner"
+    },
+    {
+      "x": 628,
+      "y": 738,
+      "type": "walker"
+    },
+    {
+      "x": 821,
+      "y": 181,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 13,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[1] = {
+  "id": 2,
+  "name": "Sessiz Sokaklar",
+  "theme": "city",
+  "palette": "#29353d",
+  "objective": "Şehirdeki yardım telsizini bul",
+  "walls": [
+    {
+      "x": 360,
+      "y": 100,
+      "w": 110,
+      "h": 300
+    },
+    {
+      "x": 360,
+      "y": 860,
+      "w": 110,
+      "h": 250
+    },
+    {
+      "x": 710,
+      "y": 170,
+      "w": 170,
+      "h": 110
+    },
+    {
+      "x": 710,
+      "y": 820,
+      "w": 170,
+      "h": 160
+    },
+    {
+      "x": 1110,
+      "y": 100,
+      "w": 150,
+      "h": 280
+    },
+    {
+      "x": 1110,
+      "y": 860,
+      "w": 150,
+      "h": 180
+    },
+    {
+      "x": 1490,
+      "y": 180,
+      "w": 100,
+      "h": 210
+    }
+  ],
+  "quest": {
+    "x": 1365,
+    "y": 580
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 573,
+      "y": 251,
+      "type": "runner"
+    },
+    {
+      "x": 766,
+      "y": 474,
+      "type": "walker"
+    },
+    {
+      "x": 959,
+      "y": 697,
+      "type": "walker"
+    },
+    {
+      "x": 1152,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1345,
+      "y": 363,
+      "type": "walker"
+    },
+    {
+      "x": 1538,
+      "y": 586,
+      "type": "runner"
+    },
+    {
+      "x": 681,
+      "y": 809,
+      "type": "walker"
+    },
+    {
+      "x": 874,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1067,
+      "y": 475,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 86,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[2] = {
+  "id": 3,
+  "name": "Son Telefon",
+  "theme": "apartments",
+  "palette": "#3c383e",
+  "objective": "Eski telefon kaydını al",
+  "walls": [
+    {
+      "x": 300,
+      "y": 130,
+      "w": 220,
+      "h": 150
+    },
+    {
+      "x": 310,
+      "y": 840,
+      "w": 220,
+      "h": 160
+    },
+    {
+      "x": 670,
+      "y": 120,
+      "w": 130,
+      "h": 290
+    },
+    {
+      "x": 670,
+      "y": 845,
+      "w": 130,
+      "h": 250
+    },
+    {
+      "x": 1110,
+      "y": 145,
+      "w": 220,
+      "h": 150
+    },
+    {
+      "x": 1130,
+      "y": 845,
+      "w": 220,
+      "h": 150
+    }
+  ],
+  "quest": {
+    "x": 1430,
+    "y": 650
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 626,
+      "y": 322,
+      "type": "runner"
+    },
+    {
+      "x": 819,
+      "y": 545,
+      "type": "walker"
+    },
+    {
+      "x": 1012,
+      "y": 768,
+      "type": "walker"
+    },
+    {
+      "x": 1205,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1398,
+      "y": 434,
+      "type": "walker"
+    },
+    {
+      "x": 541,
+      "y": 657,
+      "type": "runner"
+    },
+    {
+      "x": 734,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 927,
+      "y": 323,
+      "type": "walker"
+    },
+    {
+      "x": 1120,
+      "y": 546,
+      "type": "walker"
+    },
+    {
+      "x": 1313,
+      "y": 769,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 159,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[3] = {
+  "id": 4,
+  "name": "Kayıp Konvoy",
+  "theme": "highway",
+  "palette": "#44433e",
+  "objective": "Konvoyun askerî raporunu bul",
+  "walls": [
+    {
+      "x": 380,
+      "y": 70,
+      "w": 120,
+      "h": 350
+    },
+    {
+      "x": 380,
+      "y": 840,
+      "w": 120,
+      "h": 330
+    },
+    {
+      "x": 780,
+      "y": 120,
+      "w": 130,
+      "h": 280
+    },
+    {
+      "x": 780,
+      "y": 820,
+      "w": 130,
+      "h": 280
+    },
+    {
+      "x": 1240,
+      "y": 100,
+      "w": 130,
+      "h": 300
+    },
+    {
+      "x": 1240,
+      "y": 840,
+      "w": 130,
+      "h": 300
+    }
+  ],
+  "quest": {
+    "x": 1300,
+    "y": 510
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 679,
+      "y": 393,
+      "type": "runner"
+    },
+    {
+      "x": 872,
+      "y": 616,
+      "type": "walker"
+    },
+    {
+      "x": 1065,
+      "y": 839,
+      "type": "walker"
+    },
+    {
+      "x": 1258,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1451,
+      "y": 505,
+      "type": "walker"
+    },
+    {
+      "x": 594,
+      "y": 728,
+      "type": "runner"
+    },
+    {
+      "x": 787,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 980,
+      "y": 394,
+      "type": "walker"
+    },
+    {
+      "x": 1173,
+      "y": 617,
+      "type": "walker"
+    },
+    {
+      "x": 1366,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1559,
+      "y": 283,
+      "type": "runner"
+    },
+    {
+      "x": 1510,
+      "y": 760,
+      "type": "boss"
+    }
+  ],
+  "decorSeed": 232,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[4] = {
+  "id": 5,
+  "name": "Karanlık Metro",
+  "theme": "metro",
+  "palette": "#252d37",
+  "objective": "Jeneratör kontrol kartını bul",
+  "walls": [
+    {
+      "x": 270,
+      "y": 95,
+      "w": 120,
+      "h": 330
+    },
+    {
+      "x": 270,
+      "y": 850,
+      "w": 120,
+      "h": 260
+    },
+    {
+      "x": 600,
+      "y": 130,
+      "w": 130,
+      "h": 320
+    },
+    {
+      "x": 600,
+      "y": 840,
+      "w": 130,
+      "h": 280
+    },
+    {
+      "x": 1010,
+      "y": 100,
+      "w": 170,
+      "h": 300
+    },
+    {
+      "x": 1010,
+      "y": 840,
+      "w": 170,
+      "h": 270
+    },
+    {
+      "x": 1460,
+      "y": 95,
+      "w": 90,
+      "h": 300
+    }
+  ],
+  "quest": {
+    "x": 1365,
+    "y": 580
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 732,
+      "y": 464,
+      "type": "runner"
+    },
+    {
+      "x": 925,
+      "y": 687,
+      "type": "walker"
+    },
+    {
+      "x": 1118,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1311,
+      "y": 353,
+      "type": "walker"
+    },
+    {
+      "x": 1504,
+      "y": 576,
+      "type": "walker"
+    },
+    {
+      "x": 647,
+      "y": 799,
+      "type": "runner"
+    },
+    {
+      "x": 840,
+      "y": 242,
+      "type": "walker"
+    },
+    {
+      "x": 1033,
+      "y": 465,
+      "type": "walker"
+    },
+    {
+      "x": 1226,
+      "y": 688,
+      "type": "walker"
+    },
+    {
+      "x": 1419,
+      "y": 911,
+      "type": "walker"
+    },
+    {
+      "x": 562,
+      "y": 354,
+      "type": "runner"
+    },
+    {
+      "x": 755,
+      "y": 577,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 305,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[5] = {
+  "id": 6,
+  "name": "Güvenli Bölge",
+  "theme": "shelter",
+  "palette": "#34443d",
+  "objective": "Sığınak kapı anahtarını bul",
+  "walls": [
+    {
+      "x": 370,
+      "y": 125,
+      "w": 190,
+      "h": 190
+    },
+    {
+      "x": 370,
+      "y": 820,
+      "w": 190,
+      "h": 180
+    },
+    {
+      "x": 760,
+      "y": 100,
+      "w": 140,
+      "h": 290
+    },
+    {
+      "x": 760,
+      "y": 850,
+      "w": 140,
+      "h": 210
+    },
+    {
+      "x": 1180,
+      "y": 130,
+      "w": 170,
+      "h": 270
+    },
+    {
+      "x": 1180,
+      "y": 840,
+      "w": 170,
+      "h": 210
+    }
+  ],
+  "quest": {
+    "x": 1430,
+    "y": 650
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 785,
+      "y": 535,
+      "type": "runner"
+    },
+    {
+      "x": 978,
+      "y": 758,
+      "type": "walker"
+    },
+    {
+      "x": 1171,
+      "y": 201,
+      "type": "walker"
+    },
+    {
+      "x": 1364,
+      "y": 424,
+      "type": "walker"
+    },
+    {
+      "x": 1557,
+      "y": 647,
+      "type": "walker"
+    },
+    {
+      "x": 700,
+      "y": 870,
+      "type": "runner"
+    },
+    {
+      "x": 893,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1086,
+      "y": 536,
+      "type": "walker"
+    },
+    {
+      "x": 1279,
+      "y": 759,
+      "type": "walker"
+    },
+    {
+      "x": 1472,
+      "y": 202,
+      "type": "walker"
+    },
+    {
+      "x": 615,
+      "y": 425,
+      "type": "runner"
+    },
+    {
+      "x": 808,
+      "y": 648,
+      "type": "walker"
+    },
+    {
+      "x": 1001,
+      "y": 871,
+      "type": "walker"
+    },
+    {
+      "x": 1510,
+      "y": 760,
+      "type": "boss"
+    }
+  ],
+  "decorSeed": 378,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[6] = {
+  "id": 7,
+  "name": "İhanet",
+  "theme": "warehouse",
+  "palette": "#40383b",
+  "objective": "Gizli muhbir belgesini bul",
+  "walls": [
+    {
+      "x": 310,
+      "y": 90,
+      "w": 130,
+      "h": 310
+    },
+    {
+      "x": 310,
+      "y": 820,
+      "w": 130,
+      "h": 280
+    },
+    {
+      "x": 730,
+      "y": 90,
+      "w": 210,
+      "h": 280
+    },
+    {
+      "x": 730,
+      "y": 850,
+      "w": 210,
+      "h": 200
+    },
+    {
+      "x": 1270,
+      "y": 140,
+      "w": 120,
+      "h": 270
+    },
+    {
+      "x": 1270,
+      "y": 850,
+      "w": 120,
+      "h": 200
+    }
+  ],
+  "quest": {
+    "x": 1300,
+    "y": 510
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 838,
+      "y": 606,
+      "type": "runner"
+    },
+    {
+      "x": 1031,
+      "y": 829,
+      "type": "walker"
+    },
+    {
+      "x": 1224,
+      "y": 272,
+      "type": "walker"
+    },
+    {
+      "x": 1417,
+      "y": 495,
+      "type": "walker"
+    },
+    {
+      "x": 560,
+      "y": 718,
+      "type": "walker"
+    },
+    {
+      "x": 753,
+      "y": 600,
+      "type": "runner"
+    },
+    {
+      "x": 946,
+      "y": 384,
+      "type": "walker"
+    },
+    {
+      "x": 1139,
+      "y": 607,
+      "type": "walker"
+    },
+    {
+      "x": 1332,
+      "y": 830,
+      "type": "walker"
+    },
+    {
+      "x": 1525,
+      "y": 273,
+      "type": "walker"
+    },
+    {
+      "x": 668,
+      "y": 496,
+      "type": "runner"
+    },
+    {
+      "x": 861,
+      "y": 719,
+      "type": "walker"
+    },
+    {
+      "x": 1054,
+      "y": 942,
+      "type": "walker"
+    },
+    {
+      "x": 1247,
+      "y": 385,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 451,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[7] = {
+  "id": 8,
+  "name": "Karantina",
+  "theme": "quarantine",
+  "palette": "#33464a",
+  "objective": "Karantina sunucu verilerini al",
+  "walls": [
+    {
+      "x": 370,
+      "y": 115,
+      "w": 110,
+      "h": 295
+    },
+    {
+      "x": 370,
+      "y": 850,
+      "w": 110,
+      "h": 220
+    },
+    {
+      "x": 790,
+      "y": 110,
+      "w": 110,
+      "h": 295
+    },
+    {
+      "x": 790,
+      "y": 850,
+      "w": 110,
+      "h": 220
+    },
+    {
+      "x": 1210,
+      "y": 110,
+      "w": 110,
+      "h": 295
+    },
+    {
+      "x": 1210,
+      "y": 850,
+      "w": 110,
+      "h": 220
+    }
+  ],
+  "quest": {
+    "x": 1365,
+    "y": 580
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 891,
+      "y": 677,
+      "type": "runner"
+    },
+    {
+      "x": 1084,
+      "y": 900,
+      "type": "walker"
+    },
+    {
+      "x": 1277,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1470,
+      "y": 566,
+      "type": "walker"
+    },
+    {
+      "x": 613,
+      "y": 789,
+      "type": "walker"
+    },
+    {
+      "x": 806,
+      "y": 600,
+      "type": "runner"
+    },
+    {
+      "x": 999,
+      "y": 455,
+      "type": "walker"
+    },
+    {
+      "x": 1192,
+      "y": 678,
+      "type": "walker"
+    },
+    {
+      "x": 1385,
+      "y": 901,
+      "type": "walker"
+    },
+    {
+      "x": 528,
+      "y": 344,
+      "type": "walker"
+    },
+    {
+      "x": 721,
+      "y": 567,
+      "type": "runner"
+    },
+    {
+      "x": 914,
+      "y": 790,
+      "type": "walker"
+    },
+    {
+      "x": 1107,
+      "y": 233,
+      "type": "walker"
+    },
+    {
+      "x": 1300,
+      "y": 456,
+      "type": "walker"
+    },
+    {
+      "x": 1493,
+      "y": 679,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 524,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[8] = {
+  "id": 9,
+  "name": "Hasta Sıfır",
+  "theme": "laboratory",
+  "palette": "#34414b",
+  "objective": "Hasta Sıfır dosyasını bul",
+  "walls": [
+    {
+      "x": 290,
+      "y": 140,
+      "w": 210,
+      "h": 240
+    },
+    {
+      "x": 290,
+      "y": 860,
+      "w": 210,
+      "h": 180
+    },
+    {
+      "x": 700,
+      "y": 100,
+      "w": 160,
+      "h": 290
+    },
+    {
+      "x": 700,
+      "y": 840,
+      "w": 160,
+      "h": 240
+    },
+    {
+      "x": 1130,
+      "y": 125,
+      "w": 220,
+      "h": 240
+    },
+    {
+      "x": 1130,
+      "y": 840,
+      "w": 220,
+      "h": 220
+    }
+  ],
+  "quest": {
+    "x": 1430,
+    "y": 650
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 944,
+      "y": 748,
+      "type": "runner"
+    },
+    {
+      "x": 1137,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1330,
+      "y": 414,
+      "type": "walker"
+    },
+    {
+      "x": 1523,
+      "y": 637,
+      "type": "walker"
+    },
+    {
+      "x": 666,
+      "y": 860,
+      "type": "walker"
+    },
+    {
+      "x": 859,
+      "y": 600,
+      "type": "runner"
+    },
+    {
+      "x": 1052,
+      "y": 526,
+      "type": "walker"
+    },
+    {
+      "x": 1245,
+      "y": 749,
+      "type": "walker"
+    },
+    {
+      "x": 1438,
+      "y": 192,
+      "type": "walker"
+    },
+    {
+      "x": 581,
+      "y": 415,
+      "type": "walker"
+    },
+    {
+      "x": 774,
+      "y": 638,
+      "type": "runner"
+    },
+    {
+      "x": 967,
+      "y": 861,
+      "type": "walker"
+    },
+    {
+      "x": 1160,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1353,
+      "y": 527,
+      "type": "walker"
+    },
+    {
+      "x": 1546,
+      "y": 750,
+      "type": "walker"
+    },
+    {
+      "x": 689,
+      "y": 193,
+      "type": "runner"
+    },
+    {
+      "x": 1510,
+      "y": 760,
+      "type": "boss"
+    }
+  ],
+  "decorSeed": 597,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[9] = {
+  "id": 10,
+  "name": "Son Sinyal",
+  "theme": "tower",
+  "palette": "#303946",
+  "objective": "Telsiz verici parçasını al",
+  "walls": [
+    {
+      "x": 360,
+      "y": 100,
+      "w": 130,
+      "h": 300
+    },
+    {
+      "x": 360,
+      "y": 850,
+      "w": 130,
+      "h": 230
+    },
+    {
+      "x": 730,
+      "y": 120,
+      "w": 130,
+      "h": 270
+    },
+    {
+      "x": 730,
+      "y": 850,
+      "w": 130,
+      "h": 230
+    },
+    {
+      "x": 1110,
+      "y": 100,
+      "w": 130,
+      "h": 290
+    },
+    {
+      "x": 1110,
+      "y": 850,
+      "w": 130,
+      "h": 230
+    },
+    {
+      "x": 1450,
+      "y": 110,
+      "w": 110,
+      "h": 300
+    }
+  ],
+  "quest": {
+    "x": 1300,
+    "y": 510
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 997,
+      "y": 819,
+      "type": "runner"
+    },
+    {
+      "x": 1190,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1383,
+      "y": 485,
+      "type": "walker"
+    },
+    {
+      "x": 526,
+      "y": 708,
+      "type": "walker"
+    },
+    {
+      "x": 719,
+      "y": 931,
+      "type": "walker"
+    },
+    {
+      "x": 912,
+      "y": 374,
+      "type": "runner"
+    },
+    {
+      "x": 1105,
+      "y": 597,
+      "type": "walker"
+    },
+    {
+      "x": 1298,
+      "y": 820,
+      "type": "walker"
+    },
+    {
+      "x": 1491,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 634,
+      "y": 486,
+      "type": "walker"
+    },
+    {
+      "x": 827,
+      "y": 709,
+      "type": "runner"
+    },
+    {
+      "x": 1020,
+      "y": 932,
+      "type": "walker"
+    },
+    {
+      "x": 1213,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1406,
+      "y": 598,
+      "type": "walker"
+    },
+    {
+      "x": 549,
+      "y": 821,
+      "type": "walker"
+    },
+    {
+      "x": 742,
+      "y": 600,
+      "type": "runner"
+    },
+    {
+      "x": 935,
+      "y": 487,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 670,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[10] = {
+  "id": 11,
+  "name": "Çöküş",
+  "theme": "evacuation",
+  "palette": "#494039",
+  "objective": "Tahliye listesini kurtar",
+  "walls": [
+    {
+      "x": 350,
+      "y": 120,
+      "w": 210,
+      "h": 190
+    },
+    {
+      "x": 350,
+      "y": 830,
+      "w": 210,
+      "h": 200
+    },
+    {
+      "x": 780,
+      "y": 130,
+      "w": 210,
+      "h": 170
+    },
+    {
+      "x": 780,
+      "y": 830,
+      "w": 210,
+      "h": 200
+    },
+    {
+      "x": 1250,
+      "y": 125,
+      "w": 170,
+      "h": 210
+    },
+    {
+      "x": 1250,
+      "y": 850,
+      "w": 170,
+      "h": 200
+    }
+  ],
+  "quest": {
+    "x": 1365,
+    "y": 580
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 1050,
+      "y": 890,
+      "type": "runner"
+    },
+    {
+      "x": 1243,
+      "y": 333,
+      "type": "walker"
+    },
+    {
+      "x": 1436,
+      "y": 556,
+      "type": "walker"
+    },
+    {
+      "x": 579,
+      "y": 779,
+      "type": "walker"
+    },
+    {
+      "x": 772,
+      "y": 222,
+      "type": "walker"
+    },
+    {
+      "x": 965,
+      "y": 445,
+      "type": "runner"
+    },
+    {
+      "x": 1158,
+      "y": 668,
+      "type": "walker"
+    },
+    {
+      "x": 1351,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1544,
+      "y": 334,
+      "type": "walker"
+    },
+    {
+      "x": 687,
+      "y": 557,
+      "type": "walker"
+    },
+    {
+      "x": 880,
+      "y": 780,
+      "type": "runner"
+    },
+    {
+      "x": 1073,
+      "y": 223,
+      "type": "walker"
+    },
+    {
+      "x": 1266,
+      "y": 446,
+      "type": "walker"
+    },
+    {
+      "x": 1459,
+      "y": 669,
+      "type": "walker"
+    },
+    {
+      "x": 602,
+      "y": 892,
+      "type": "walker"
+    },
+    {
+      "x": 795,
+      "y": 335,
+      "type": "runner"
+    },
+    {
+      "x": 988,
+      "y": 558,
+      "type": "walker"
+    },
+    {
+      "x": 1181,
+      "y": 781,
+      "type": "walker"
+    }
+  ],
+  "decorSeed": 743,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+window.SON_GECE_CHAPTERS = window.SON_GECE_CHAPTERS || [];
+window.SON_GECE_CHAPTERS[11] = {
+  "id": 12,
+  "name": "Son Gece",
+  "theme": "finale",
+  "palette": "#282d36",
+  "objective": "Son gece kanıtını ele geçir",
+  "walls": [
+    {
+      "x": 310,
+      "y": 95,
+      "w": 160,
+      "h": 290
+    },
+    {
+      "x": 310,
+      "y": 845,
+      "w": 160,
+      "h": 210
+    },
+    {
+      "x": 710,
+      "y": 95,
+      "w": 160,
+      "h": 300
+    },
+    {
+      "x": 710,
+      "y": 845,
+      "w": 160,
+      "h": 210
+    },
+    {
+      "x": 1120,
+      "y": 95,
+      "w": 160,
+      "h": 300
+    },
+    {
+      "x": 1120,
+      "y": 845,
+      "w": 160,
+      "h": 210
+    },
+    {
+      "x": 1450,
+      "y": 110,
+      "w": 110,
+      "h": 260
+    }
+  ],
+  "quest": {
+    "x": 1430,
+    "y": 650
+  },
+  "exit": {
+    "x": 1770,
+    "y": 610
+  },
+  "enemies": [
+    {
+      "x": 1103,
+      "y": 181,
+      "type": "runner"
+    },
+    {
+      "x": 1296,
+      "y": 404,
+      "type": "walker"
+    },
+    {
+      "x": 1489,
+      "y": 627,
+      "type": "walker"
+    },
+    {
+      "x": 632,
+      "y": 850,
+      "type": "walker"
+    },
+    {
+      "x": 825,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1018,
+      "y": 516,
+      "type": "runner"
+    },
+    {
+      "x": 1211,
+      "y": 739,
+      "type": "walker"
+    },
+    {
+      "x": 1404,
+      "y": 182,
+      "type": "walker"
+    },
+    {
+      "x": 547,
+      "y": 405,
+      "type": "walker"
+    },
+    {
+      "x": 740,
+      "y": 628,
+      "type": "walker"
+    },
+    {
+      "x": 933,
+      "y": 851,
+      "type": "runner"
+    },
+    {
+      "x": 1126,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1319,
+      "y": 517,
+      "type": "walker"
+    },
+    {
+      "x": 1512,
+      "y": 740,
+      "type": "walker"
+    },
+    {
+      "x": 655,
+      "y": 183,
+      "type": "walker"
+    },
+    {
+      "x": 848,
+      "y": 406,
+      "type": "runner"
+    },
+    {
+      "x": 1041,
+      "y": 629,
+      "type": "walker"
+    },
+    {
+      "x": 1234,
+      "y": 600,
+      "type": "walker"
+    },
+    {
+      "x": 1427,
+      "y": 295,
+      "type": "walker"
+    },
+    {
+      "x": 1510,
+      "y": 760,
+      "type": "boss"
+    }
+  ],
+  "decorSeed": 816,
+  "pickups": [
+    {
+      "x": 510,
+      "y": 650,
+      "type": "ammo"
+    },
+    {
+      "x": 875,
+      "y": 610,
+      "type": "med"
+    },
+    {
+      "x": 1140,
+      "y": 650,
+      "type": "ammo"
+    }
+  ]
+};
+
+'use strict';
+// ZOMBIE SIMULATOR: SON GECE — playable story foundation
+const $=id=>document.getElementById(id), canvas=$('game'), ctx=canvas.getContext('2d');
+const TAU=Math.PI*2, SAVE='son-gece-save-2026-v3', WORLD={w:1900,h:1250};
+const names=['Uyanış','Sessiz Sokaklar','Son Telefon','Kayıp Konvoy','Karanlık Metro','Güvenli Bölge','İhanet','Karantina','Hasta Sıfır','Son Sinyal','Çöküş','Son Gece'];
+const stories=[
+ ['HASTANE / 03:17','EMRE|Gözümü açtığımda koridor boştu. Serum hâlâ kolumdaydı.','TELSİZ|Ben Doktor Leyla. Hastane tahliye edildi, ama seni almaya kimse gelmedi.','EMRE|Neden?','LEYLA|Hasta kayıtlarını bul. Ne olduğunu ancak o zaman anlayabiliriz.'],
+ ['SOKAK / 04:02','EMRE|Hastaneden çıktım. Sokakta terk edilmiş arabalar var.','LEYLA|Köşedeki marketin deposunda yardım telsizi olabilir.','EMRE|Önce bir eve sığınmam gerek. Yaralıyım.','LEYLA|Sarı çatılı ev güvenli görünüyor. Orada biraz dinlen.'],
+ ['APARTMAN / 05:18','EMRE|Bu apartman... Eskiden burada oturuyordum.','TELEFON KAYDI|Emre, eve gelirsen sakın bodruma inme. Anahtar komşuda.','EMRE|Bu ses... Annemin sesi. Kaydı kim bıraktı?','LEYLA|Kaydı bul, sonra konuşacağız.'],
+ ['OTOYOL / 06:40','ASKER KAYDI|Konvoy 7, köprüye varmadan saldırıya uğradı.','EMRE|Araçların kapıları içeriden kilitlenmiş.','LEYLA|Komutanın raporunu bul. Buradan ne taşındığını bilmemiz gerekiyor.'],
+ ['METRO / 07:35','EMRE|Metro girişinde acil durum ışıkları yanıyor.','LEYLA|Jeneratör kapanırsa tünellerde mahsur kalırsın.','EMRE|Rayların yanında ayak izleri var... İnsan izleri.'],
+ ['SIĞINAK / 09:10','DENİZ|Kapıyı kapatın! Enfekteler peşimizde!','EMRE|Ben yardım edebilirim. Önce içeridekileri güvene alın.','DENİZ|Nöbeti atlatalım, sonra sana sıcak bir yer ayarlarız.'],
+ ['SIĞINAK / 11:05','EMRE|Yardım malzemeleri kaybolmuş. Bunu kim yaptı?','DENİZ|Güvenlik kameraları silinmiş, ama bir anahtar kartı eksik.','LEYLA|İçeride biri dışarıya bilgi gönderiyor. Belgeleri bul.'],
+ ['KARANTİNA / 12:30','EMRE|Karantina kapısında aynı şirketin logosu var.','LEYLA|O şirketin adını daha önce duydum: ARKA.','EMRE|İnsanları tedavi etmek yerine burada ne yaptılar?'],
+ ['LABORATUVAR / 14:00','SES KAYDI|Denek sıfır, beklenen tepkiyi göstermedi.','EMRE|Bu bir salgın değil... Bir deneyin sonucu.','LEYLA|Kayıtları al. Birileri gerçeği örtbas etmeye çalışıyor.'],
+ ['RADYO KULESİ / 16:20','EMRE|Leyla, neden yüzünü hiç görmedim?','LEYLA|Çünkü seni hastanede bırakmak zorunda kalan bendim.','EMRE|O gün ne olduğunu bana anlatacaksın. Önce kuleye çıkıyorum.'],
+ ['TAHLİYE NOKTASI / 19:45','DENİZ|Son otobüs yirmi dakika içinde kalkıyor!','EMRE|Geride kalanları almadan gitmiyoruz.','LEYLA|Şehrin elektriği kesilmeden tahliye listesini bul.'],
+ ['SON GECE / 23:59','EMRE|Bütün kayıtlar elimde. Artık gerçeği saklayamazlar.','LEYLA|Verileri yayınlarsan sığınağın yerini de öğrenebilirler.','DENİZ|Karar senin Emre. İnsanları mı koruyacağız, gerçeği mi açıklayacağız?']
+];
+const descriptions=['Hastane dosyasını al ve çıkışa ulaş','Şehirdeki yardım çantasını bul ve çık','Telefon kaydını bul ve çık','Konvoy raporunu al ve çık','Metro jeneratörünü çalıştır ve çık','Sığınak anahtarını al ve çık','Gizli belgeyi ele geçir ve çık','Karantina verisini al ve çık','Hasta Sıfır kaydını bul ve çık','Verici parçasını al ve çık','Tahliye listesini bul ve çık','Son kanıtı al ve kararını ver'];
+let view={w:1,h:1,dpr:1},camera={x:0,y:0},player=null,level=0,unlocked=0,saveData=null,mode='menu',paused=false;
+let walls=[],enemies=[],bullets=[],items=[],particles=[],keys={},joy={x:0,y:0},shootHeld=false,runHeld=false,mouse={x:0,y:0,seen:false};
+let restDone=false, restSpot=null;
+let time=0,last=0,shotNoise=0,toastUntil=0,cutIndex=0,cutLines=[],cutNext=null,cutElapsed=0,cutDuration=3.7,objectiveTaken=false,killCount=0,exit={x:1770,y:610},settings={sound:true,shake:true,rain:true},audio=null,shake=0;
+const clamp=(v,a,b)=>Math.max(a,Math.min(b,v)),dist=(a,b)=>Math.hypot(a.x-b.x,a.y-b.y),rand=(a,b)=>a+Math.random()*(b-a);
+function resize(){view.w=canvas.clientWidth||innerWidth;view.h=canvas.clientHeight||innerHeight;view.dpr=Math.min(devicePixelRatio||1,2);canvas.width=Math.round(view.w*view.dpr);canvas.height=Math.round(view.h*view.dpr);ctx.setTransform(view.dpr,0,0,view.dpr,0,0)}
+addEventListener('resize',resize);resize();
+function sound(freq=120,duration=.07,type='sawtooth',volume=.035){if(!settings.sound)return;try{audio??=new (window.AudioContext||window.webkitAudioContext)();if(audio.state==='suspended')audio.resume();const o=audio.createOscillator(),g=audio.createGain();o.type=type;o.frequency.setValueAtTime(freq,audio.currentTime);o.frequency.exponentialRampToValueAtTime(Math.max(30,freq*.55),audio.currentTime+duration);g.gain.setValueAtTime(volume,audio.currentTime);g.gain.exponentialRampToValueAtTime(.001,audio.currentTime+duration);o.connect(g);g.connect(audio.destination);o.start();o.stop(audio.currentTime+duration)}catch(e){}}
+function hideAll(){['menu','chapters','settings','help','pause','ending','cutscene'].forEach(id=>$(id).classList.add('hidden'))}
+function showScreen(id){hideAll();if(id!=='none' && $(id))$(id).classList.remove('hidden');$('hud').classList.toggle('hidden',id!=='none'&&id!=='pause');$('touch').classList.toggle('hidden',id!=='none'&&id!=='pause')}
+function toast(s,seconds=2.6){$('toast').textContent=s;$('toast').classList.remove('hidden');toastUntil=time+seconds}
+function loadSave(){try{saveData=JSON.parse(localStorage.getItem(SAVE));unlocked=clamp(saveData?.unlocked||0,0,11)}catch(e){saveData=null} $('continueButton').disabled=!saveData?.run}
+function save(){if(!player)return;const run={level,player:{x:player.x,y:player.y,hp:player.hp,ammo:player.ammo,medkits:player.medkits},objectiveTaken,restDone,killCount,items:items.map(i=>i.taken),enemies:enemies.map(z=>({x:z.x,y:z.y,hp:z.hp,type:z.type}))};saveData={unlocked,run};try{localStorage.setItem(SAVE,JSON.stringify(saveData))}catch(e){toast('Tarayıcı kayıt izni vermedi')} $('continueButton').disabled=false}
+function saveUnlock(){saveData={unlocked,run:null};try{localStorage.setItem(SAVE,JSON.stringify(saveData))}catch(e){} $('continueButton').disabled=true}
+function chapterCards(){const root=$('chapterGrid');root.innerHTML='';names.forEach((name,i)=>{const b=document.createElement('button');b.className='chapter-card';b.disabled=i>unlocked;b.innerHTML=`<strong>${String(i+1).padStart(2,'0')} · ${name}</strong><small>${i>unlocked?'🔒 Kilitli':window.SON_GECE_CHAPTERS[i].objective}</small>`;b.onclick=()=>startLevel(i);root.append(b)})}
+function addWall(x,y,w,h){walls.push({x,y,w,h})}
+function solid(x,y,r){if(x<r+15||y<r+15||x>WORLD.w-r-15||y>WORLD.h-r-15)return true;for(const b of walls){const px=clamp(x,b.x,b.x+b.w),py=clamp(y,b.y,b.y+b.h);if(Math.hypot(x-px,y-py)<r)return true}return false}
+function move(o,dx,dy){if(!solid(o.x+dx,o.y,o.r))o.x+=dx;if(!solid(o.x,o.y+dy,o.r))o.y+=dy}
+function spawnLevel(){
+ walls=[];enemies=[];items=[];bullets=[];particles=[];objectiveTaken=false;killCount=0;restDone=false;restSpot=[1,5,9].includes(level)?{x:650,y:580}:null;
+ const cfg=window.SON_GECE_CHAPTERS?.[level];
+ if(!cfg){throw new Error('Bölüm dosyası eksik: chapters/chapter'+String(level+1).padStart(2,'0')+'.js')}
+ walls=cfg.walls.map(w=>({...w})).filter(w=>!restSpot||Math.hypot(clamp(restSpot.x,w.x,w.x+w.w)-restSpot.x,clamp(restSpot.y,w.y,w.y+w.h)-restSpot.y)>115);
+ exit={...cfg.exit};
+ enemies=cfg.enemies.filter(z=>!solid(z.x,z.y,z.type==='boss'?30:16)).map(z=>zombie(z.x,z.y,z.type));
+ items=cfg.pickups.map(i=>({...i,taken:false}));
+ items.push({...cfg.quest,type:'quest',taken:false});
+ player={x:135,y:615,r:17,hp:100,ammo:36,medkits:2,angle:0,step:0,cooldown:0,hurt:0};
+}
+function zombie(x,y,type){return{x,y,r:type==='boss'?30:16,type,hp:type==='boss'?400:type==='runner'?55:90,maxHp:type==='boss'?400:type==='runner'?55:90,speed:type==='boss'?55:type==='runner'?135:72,angle:0,step:0,attack:0,alert:0}}
+function updateHud(){
+ if(!player)return;
+ $('chapterName').textContent=`BÖLÜM ${level+1} · ${names[level]}`;
+ $('healthFill').style.width=player.hp+'%';
+ $('stats').textContent=`${Math.ceil(player.hp)} CAN · ${player.ammo} MERMİ · ${player.medkits} İLK YARDIM`;
+ const restNeeded=!!restSpot&&!restDone;
+ $('objective').textContent=restNeeded?'GÖREV: Güvenli eve git ve dinlen':objectiveTaken?'GÖREV: Doğu tahliye noktasına ulaş':`GÖREV: ${window.SON_GECE_CHAPTERS[level].objective}`;
+ $('progress').textContent=`Zombi etkisiz: ${killCount} · ${restNeeded?'Dinlenme gerekiyor':objectiveTaken?'Kanıt bulundu':'Görev eşyası aranıyor'}`;
+}
+
+function startLevel(i,restore=null){level=i;time=0;paused=false;mode='game';keys={};joy={x:0,y:0};shootHeld=false;spawnLevel();if(restore){Object.assign(player,restore.player);objectiveTaken=restore.objectiveTaken;restDone=!!restore.restDone;killCount=restore.killCount||0;items.forEach((it,n)=>it.taken=!!restore.items?.[n]);if(restore.enemies)enemies=restore.enemies.map(e=>Object.assign(zombie(e.x,e.y,e.type),{hp:e.hp}));showScreen('none');toast('Kayıt yüklendi')}else{showScreen('none');beginCutscene(stories[i],()=>{mode='game';toast('Görev başladı · E ile eşya topla',3)})}updateHud()}
+function beginCutscene(lines,next){mode='cutscene';cutLines=lines;cutIndex=0;cutNext=next;cutElapsed=0;showScreen('cutscene');renderCut()}
+function renderCut(){const line=cutLines[cutIndex];if(!line)return;const parts=line.split('|');$('cinemaSpeaker').textContent=parts.length>1?parts[0]:'SON GECE';$('cinemaText').textContent=parts.length>1?parts.slice(1).join('|'):line}
+function nextCut(){cutIndex++;cutElapsed=0;sound(270,.04,'sine');if(cutIndex>=cutLines.length){const cb=cutNext;cutNext=null;showScreen('none');mode='game';if(cb)cb()}else renderCut()}
+function skipCut(){if(mode!=='cutscene')return;const cb=cutNext;cutNext=null;showScreen('none');mode='game';if(cb)cb()}
+function nearest(range=480){let best=null,d=range;for(const z of enemies){const n=dist(player,z);if(n<d){best=z;d=n}}return best}
+function shoot(){if(mode!=='game'||paused||player.cooldown>0)return;if(player.ammo<=0){toast('Mermi bitti!');player.cooldown=.35;return}player.ammo--;player.cooldown=.22;shotNoise=3;shake=settings.shake?3:0;sound(165,.11);const a=player.angle;bullets.push({x:player.x+Math.cos(a)*27,y:player.y+Math.sin(a)*27,vx:Math.cos(a)*820,vy:Math.sin(a)*820,life:.9});for(const z of enemies)if(dist(z,player)<600)z.alert=3.8}
+function interact(){
+ if(mode!=='game'||paused)return;
+ if(restSpot&&!restDone&&dist(player,restSpot)<105){
+   restDone=true;player.hp=100;player.ammo+=12;player.medkits+=1;
+   sound(490,.22,'sine');
+   beginCutscene(level===1?[
+    'GÜVENLİ EV / 04:28','EMRE|Kapıyı içeriden kilitledim. İlk defa sessizlik var.','EMRE|Buzdolabında su buldum. Yaramı sardım, biraz uyuyacağım.','LEYLA|Dinlen Emre. Sabah olmadan telsizi bulmalıyız.'
+   ]:level===5?[
+    'SIĞINAK / 10:25','DENİZ|Bu yatak senin. Nöbeti ben devralırım.','EMRE|Uyumadan önce ailemden haber var mı?','DENİZ|Henüz yok. Ama aramayı bırakmayacağız.'
+   ]:[
+    'RADYO KULESİ / 17:10','LEYLA|Kule bekçi odasında biraz dinlen.','EMRE|Bunca şeyden sonra uyumak kolay değil.','LEYLA|Sabaha çıkmak istiyorsan gücünü toplamalısın.'
+   ],()=>{toast('Dinlendin · Can yenilendi, +12 mermi, +1 ilk yardım',4);updateHud();save()});
+   return;
+ }
+ if(restSpot&&!restDone){toast('Önce haritadaki GÜVENLİ EV işaretine git');return;}
+ let best=null,range=80;
+ for(const it of items){if(it.taken)continue;const d=dist(player,it);if(d<range){best=it;range=d}}
+ if(best){best.taken=true;
+  if(best.type==='quest'){
+    objectiveTaken=true;sound(570,.2,'sine');
+    const reactions=[
+      ['EMRE|Dosyada benim adım var. Buraya tesadüfen getirilmemişim.','LEYLA|Bunu konuşacağız. Şimdilik hastaneden çık.'],
+      ['EMRE|Telsiz çalışıyor. İçinde bir yardım frekansı kayıtlı.','LEYLA|Frekansı kaydet. Bir sonraki durak apartmanlar.'],
+      ['EMRE|Telefondaki mesaj silinmemiş.','KAYIT|Emre, eğer dönersem seni bulacağım.'],
+      ['EMRE|Konvoyda ilaç değil, numune taşımışlar.','LEYLA|O numuneler salgını açıklayabilir.'],
+      ['EMRE|Jeneratörü çalıştırdım. Raylar aydınlandı.','LEYLA|Şimdi çıkış tüneline ulaş.'],
+      ['DENİZ|Sığınağın anahtarı sende kalsın.','EMRE|Bu insanları burada yalnız bırakamam.'],
+      ['EMRE|Güvenlik kartında Deniz’in adı yazıyor...','LEYLA|Hemen hüküm verme. Belki başka açıklaması vardır.'],
+      ['EMRE|Sunucu kayıtlarını kopyaladım.','LEYLA|Hasta Sıfır dosyasına yaklaşıyoruz.'],
+      ['EMRE|Denek sıfırın adı dosyada gizlenmiş.','LEYLA|Şifreyi kulede çözebiliriz.'],
+      ['EMRE|Verici tekrar çalışıyor.','LEYLA|Artık benim de anlatacaklarım var.'],
+      ['EMRE|Tahliye listesini buldum. On iki kişi hâlâ içeride.','DENİZ|Onları almadan otobüsü kaldırmayacağız.'],
+      ['EMRE|Son kanıt elimde.','LEYLA|Şimdi yapacağın seçim herkesin geleceğini değiştirecek.']
+    ];
+    beginCutscene(reactions[level],()=>{toast('GÖREV TAMAMLANDI · ÇIKIŞA GİT',4);updateHud();save()});
+  }else if(best.type==='ammo'){player.ammo+=24;toast('+24 MERMİ');sound(450,.1,'sine')}
+  else{player.medkits++;toast('+1 İLK YARDIM');sound(450,.1,'sine')}
+  save();updateHud();return;
+ }
+ if(dist(player,exit)<105){
+   if(!objectiveTaken){toast('Önce görev eşyasını bul!');return}
+   if(enemies.some(z=>z.type==='boss')){toast('Önce boss zombiyi yen!');return}
+   complete();return;
+ }
+ toast('Yakında etkileşim yok');
+}
+
+function heal(){if(mode!=='game'||paused)return;if(player.medkits<1){toast('İlk yardım çantası yok');return}if(player.hp>=100){toast('Canın zaten dolu');return}player.medkits--;player.hp=Math.min(100,player.hp+55);sound(550,.2,'sine');toast('+55 CAN');updateHud()}
+function complete(){
+ mode='ending';shootHeld=false;unlocked=Math.max(unlocked,Math.min(11,level+1));saveUnlock();
+ const endings=[
+ 'LEYLA|Hastaneden çıktın. Seni uzaktan görüyorum.','EMRE|Sokaklar sandığımdan da kötü durumda.',
+ 'EMRE|Bu kayıtlar birbirine bağlanıyor.','EMRE|Konvoyun izleri metroya gidiyor.',
+ 'EMRE|Tünelin sonunda ışık var.','DENİZ|Bizi kurtardın. Bu iyiliğini unutmayacağız.',
+ 'EMRE|İçerideki hainin izini bulacağım.','EMRE|Karantina merkezinin kapısı arkamdan kapandı.',
+ 'LEYLA|Gerçeğin yarısını öğrendik.','EMRE|Artık Leyla ile yüzleşme zamanı.',
+ 'DENİZ|Tahliye için son şansımız.','EMRE|Kimseyi geride bırakmayacağım.'
+ ];
+ beginCutscene([`BÖLÜM ${level+1} TAMAMLANDI`,endings[level],level===11?'SON GECE|Her kararın bir bedeli vardır.':`SONRAKİ DURAK|${names[level+1]}`],()=>{
+ mode='ending';showScreen('ending');$('endingLabel').textContent=level===11?'SEZON FİNALİ':'BÖLÜM TAMAMLANDI';$('endingTitle').textContent=level===11?'SON GECE BİTTİ':names[level];$('endingText').textContent=level===11?'Emre hayatta kaldı. Hikâyenin ilk sezonu sona erdi.':`Sıradaki bölüm: ${names[level+1]}`;$('endingButton').textContent=level===11?'BÖLÜMLER':'SONRAKİ BÖLÜM';
+ });
+}
+
+function die(){mode='ending';shootHeld=false;showScreen('ending');$('endingLabel').textContent='HAYATTA KALAMADIN';$('endingTitle').textContent='SON BİR ŞANS';$('endingText').textContent='Bu bölümü yeniden deneyebilirsin.';$('endingButton').textContent='TEKRAR DENE';sound(60,.6)}
+function update(dt){if(mode==='cutscene'){cutElapsed+=dt;if(cutElapsed>cutDuration)nextCut();return}if(mode!=='game'||paused)return;time+=dt;let dx=joy.x,dy=joy.y;if(keys.w||keys.arrowup)dy--;if(keys.s||keys.arrowdown)dy++;if(keys.a||keys.arrowleft)dx--;if(keys.d||keys.arrowright)dx++;const len=Math.hypot(dx,dy);if(len>1){dx/=len;dy/=len}const speed=(keys.shift||runHeld)?265:185;move(player,dx*speed*dt,dy*speed*dt);if(len>.1)player.step+=dt*12;player.cooldown=Math.max(0,player.cooldown-dt);player.hurt=Math.max(0,player.hurt-dt);shotNoise=Math.max(0,shotNoise-dt);
+ if(matchMedia('(pointer:coarse)').matches){const z=nearest();if(z)player.angle=Math.atan2(z.y-player.y,z.x-player.x);else if(len>.1)player.angle=Math.atan2(dy,dx)}else if(mouse.seen){player.angle=Math.atan2(mouse.y+camera.y-player.y,mouse.x+camera.x-player.x)}else if(len>.1)player.angle=Math.atan2(dy,dx);
+ if(shootHeld)shoot();
+ for(const z of enemies){const d=dist(player,z);z.attack-=dt;z.alert=Math.max(0,z.alert-dt);if(d<280||z.alert>0||shotNoise>0&&d<470){z.angle=Math.atan2(player.y-z.y,player.x-z.x);z.step+=dt*9;if(d>player.r+z.r+2)move(z,Math.cos(z.angle)*z.speed*dt,Math.sin(z.angle)*z.speed*dt);else if(z.attack<=0&&player.hurt<=0){player.hp=Math.max(0,player.hp-(z.type==='boss'?24:12));player.hurt=.85;z.attack=.9;shake=settings.shake?8:0;sound(85,.15);if(player.hp<=0){die();break}}}}
+ for(let i=bullets.length-1;i>=0;i--){const b=bullets[i];let hit=false;const steps=Math.max(1,Math.ceil(820*dt/9));for(let n=0;n<steps&&!hit;n++){b.x+=b.vx*dt/steps;b.y+=b.vy*dt/steps;if(solid(b.x,b.y,3)){hit=true;break}for(let j=enemies.length-1;j>=0;j--){const z=enemies[j];if(dist(b,z)<z.r+3){z.hp-=40;z.alert=4;hit=true;for(let p=0;p<6;p++)particles.push({x:b.x,y:b.y,vx:rand(-90,90),vy:rand(-90,90),life:rand(.2,.5)});if(z.hp<=0){enemies.splice(j,1);killCount++;if(killCount%4===0)player.ammo+=8}break}}}b.life-=dt;if(hit||b.life<=0)bullets.splice(i,1)}
+ for(let i=particles.length-1;i>=0;i--){const p=particles[i];p.x+=p.vx*dt;p.y+=p.vy*dt;p.life-=dt;if(p.life<=0)particles.splice(i,1)}shake=Math.max(0,shake-dt*22);if(time>toastUntil)$('toast').classList.add('hidden');$('interactHint').textContent=dist(player,exit)<105?'E · ÇIKIŞ':items.some(i=>!i.taken&&dist(player,i)<80)?'E · TOPLA':'E · ETKİLEŞ';updateHud()}
+function fill(x,y,w,h,color){ctx.fillStyle=color;ctx.fillRect(x,y,w,h)}
+function disk(x,y,r,color){ctx.fillStyle=color;ctx.beginPath();ctx.arc(x,y,r,0,TAU);ctx.fill()}
+function actor(e,enemy=false){ctx.save();ctx.translate(e.x,e.y);ctx.rotate(e.angle);const w=Math.sin(e.step)*5;disk(4,8,e.r+5,'#0008');fill(-17+w,-12,14,9,enemy?'#343b32':'#273f58');fill(-17-w,4,14,9,enemy?'#343b32':'#273f58');fill(-3,-19,21,8,enemy?'#6b8562':'#c89573');fill(-3,11,21,8,enemy?'#6b8562':'#c89573');disk(0,0,e.r,enemy?(e.type==='boss'?'#814148':'#5e784e'):'#237eb3');disk(7,0,enemy?9:10,enemy?'#9bab78':'#e2b18b');if(enemy){disk(14,-4,2,'#ff3c45');disk(14,4,2,'#ff3c45')}else{ctx.strokeStyle='#d9eafa';ctx.lineWidth=2;ctx.beginPath();ctx.arc(0,0,20,0,TAU);ctx.stroke();fill(13,-4,27,8,'#17242e')}ctx.restore();if(enemy&&e.type==='boss'){fill(e.x-35,e.y-45,70,6,'#3b1b1e');fill(e.x-35,e.y-45,70*e.hp/e.maxHp,6,'#dc4545')}}
+function drawMap(){const palettes=['#39464a','#343e42','#3e3d41','#45413d','#30353b','#3c4540','#3c4145','#40494a','#404147','#3b444d','#444039','#30373d'];fill(0,0,WORLD.w,WORLD.h,window.SON_GECE_CHAPTERS[level].palette);ctx.strokeStyle='#ffffff10';ctx.lineWidth=1;for(let x=0;x<WORLD.w;x+=64){ctx.beginPath();ctx.moveTo(x,0);ctx.lineTo(x,WORLD.h);ctx.stroke()}for(let y=0;y<WORLD.h;y+=64){ctx.beginPath();ctx.moveTo(0,y);ctx.lineTo(WORLD.w,y);ctx.stroke()}
+ for(let i=0;i<75;i++){const x=(i*241+level*43)%WORLD.w,y=(i*179+level*31)%WORLD.h;disk(x,y,5+(i%5)*3,i%4===0?'#632e35':'#202d3480')}
+ // Bölüme özgü belirgin mekânlar: ev, metro rayları, otoyol, hastane odaları.
+ const scene=window.SON_GECE_CHAPTERS[level].theme;
+ if(['city','highway','evacuation'].includes(scene)){
+  for(let y=90;y<1200;y+=240){fill(50,y,1800,22,'#111a1f');fill(50,y+10,1800,3,'#e2c88755')}
+  for(let x=280;x<1650;x+=360){fill(x,75,175,160,'#202a32');fill(x+12,95,55,45,'#c2a76d44');fill(x+90,95,55,45,'#c2a76d44')}
+ }
+ if(scene==='metro'){for(let y of [430,490,740,800])fill(50,y,1800,13,'#a0a5a9');for(let x=70;x<1800;x+=70){fill(x,420,16,395,'#161f24')}}
+ if(['hospital','quarantine','laboratory'].includes(scene)){for(let x=180;x<1700;x+=380){fill(x,80,135,70,'#a4b4b6');fill(x+9,88,117,54,'#6d8792');fill(x+45,97,42,35,'#d9d9cc')}}
+ if(scene==='shelter'){for(let x=190;x<1650;x+=270){fill(x,105,150,105,'#536650');fill(x+10,115,130,85,'#859481')}}
+ if(restSpot){
+  fill(restSpot.x-84,restSpot.y-74,168,148,restDone?'#38564d':'#b6a477');
+  fill(restSpot.x-66,restSpot.y-54,132,108,'#263e47');
+  fill(restSpot.x-20,restSpot.y-4,40,58,'#7c513d');
+  fill(restSpot.x-61,restSpot.y-49,35,29,'#e5d29d');
+  ctx.fillStyle='#fff2be';ctx.font='bold 19px Arial';ctx.textAlign='center';ctx.fillText(restDone?'DİNLENDİN':'GÜVENLİ EV',restSpot.x,restSpot.y-94);
+ }
+ // Her bölümün kendine özgü çevre işaretleri
+ const theme=window.SON_GECE_CHAPTERS[level].theme;
+ ctx.save();ctx.globalAlpha=.55;
+ for(let n=0;n<17;n++){
+  const x=170+(n*311+level*37)%1600,y=75+(n*227+level*53)%1060;
+  if(theme==='hospital'||theme==='quarantine'||theme==='laboratory'){
+   fill(x,y,55,32,'#c2cdd0');fill(x+5,y+5,45,22,'#72858b');
+   fill(x+22,y+8,6,16,'#b34343');fill(x+17,y+13,16,6,'#b34343');
+  }else if(theme==='city'||theme==='highway'||theme==='evacuation'){
+   fill(x,y,90,38,'#1c272c');fill(x+9,y+5,60,23,'#586b74');
+   fill(x+8,y+31,15,9,'#0a1015');fill(x+67,y+31,15,9,'#0a1015');
+  }else if(theme==='metro'||theme==='tower'){
+   fill(x,y,95,13,'#66787c');fill(x+20,y+15,8,80,'#232d34');
+  }else if(theme==='shelter'||theme==='warehouse'){
+   fill(x,y,64,48,'#77674e');fill(x+5,y+5,54,38,'#8b795a');
+  }else{
+   fill(x,y,70,50,'#434a52');fill(x+8,y+8,54,34,'#627077');
+  }
+ }
+ ctx.restore();
+ for(const w of walls){fill(w.x+7,w.y+8,w.w,w.h,'#0c151c');fill(w.x,w.y,w.w,w.h,level===4?'#66777e':'#596c73');fill(w.x+5,w.y+5,w.w-10,w.h-10,'#819099')}
+ for(const i of items){if(i.taken)continue;disk(i.x,i.y,24+Math.sin(time*4)*3,'#efc86644');ctx.textAlign='center';ctx.textBaseline='middle';ctx.font='26px Arial';ctx.fillText(i.type==='quest'?'📁':i.type==='ammo'?'📦':'✚',i.x,i.y)}disk(exit.x,exit.y,42,objectiveTaken?'#43cb8055':'#c74c4c44');fill(exit.x-24,exit.y-40,48,80,objectiveTaken?'#32875b':'#9a4a4a');ctx.fillStyle='white';ctx.textAlign='center';ctx.font='bold 15px Arial';ctx.fillText('ÇIKIŞ',exit.x,exit.y-51)}
+function draw(){ctx.clearRect(0,0,view.w,view.h);if(!player)return;camera.x=clamp(player.x-view.w/2,0,Math.max(0,WORLD.w-view.w));camera.y=clamp(player.y-view.h/2,0,Math.max(0,WORLD.h-view.h));ctx.save();ctx.translate(-camera.x+(shake?(Math.random()-.5)*shake:0),-camera.y+(shake?(Math.random()-.5)*shake:0));drawMap();for(const z of enemies)actor(z,true);if(player.hurt>0&&Math.floor(time*15)%2)ctx.globalAlpha=.5;actor(player);ctx.globalAlpha=1;for(const b of bullets)disk(b.x,b.y,4,'#ffdb86');for(const p of particles)disk(p.x,p.y,3,'#b83b43');ctx.restore();fill(0,0,view.w,view.h,'#02081233');const px=player.x-camera.x,py=player.y-camera.y;const g=ctx.createRadialGradient(px,py,0,px,py,280);g.addColorStop(0,'#f3d98d30');g.addColorStop(1,'#f3d98d00');ctx.fillStyle=g;ctx.fillRect(px-280,py-280,560,560);ctx.save();ctx.translate(px,py);ctx.rotate(player.angle);const beam=ctx.createLinearGradient(0,0,390,0);beam.addColorStop(0,'#ffecb43a');beam.addColorStop(1,'#ffecb400');ctx.fillStyle=beam;ctx.beginPath();ctx.moveTo(0,0);ctx.lineTo(390,-150);ctx.lineTo(390,150);ctx.closePath();ctx.fill();ctx.restore();
+// Görev pusulası: sarı ok kanıtı, yeşil ok çıkışı gösterir.
+if(mode==='game' && !paused){
+ const target=objectiveTaken?exit:items.find(i=>i.type==='quest'&&!i.taken);
+ if(target){const angle=Math.atan2(target.y-player.y,target.x-player.x);
+ ctx.save();ctx.translate(view.w/2,Math.min(105,view.h*.20));ctx.rotate(angle+Math.PI/2);
+ ctx.fillStyle=objectiveTaken?'#65e3a1':'#ffd36c';ctx.beginPath();ctx.moveTo(0,-17);ctx.lineTo(-11,10);ctx.lineTo(11,10);ctx.closePath();ctx.fill();ctx.restore();
+ ctx.fillStyle='#fff';ctx.textAlign='center';ctx.font='bold 12px Arial';ctx.fillText(objectiveTaken?'ÇIKIŞA GİT':'📁 KANITI BUL',view.w/2,Math.min(137,view.h*.20+32));
+ }
+}
+}
+function loop(now){const dt=Math.min((now-last)/1000||0,.033);last=now;update(dt);if(mode==='game'||mode==='cutscene'||mode==='pause'||mode==='ending')draw();requestAnimationFrame(loop)}
+function togglePause(){if(mode!=='game'&&mode!=='pause')return;paused=!paused;mode=paused?'pause':'game';shootHeld=false;showScreen(paused?'pause':'none')}
+$('newButton').onclick=()=>startLevel(0);$('continueButton').onclick=()=>{if(saveData?.run)startLevel(saveData.run.level,saveData.run)};$('chaptersButton').onclick=()=>{chapterCards();showScreen('chapters')};$('settingsButton').onclick=()=>showScreen('settings');$('helpButton').onclick=()=>showScreen('help');document.querySelectorAll('[data-back]').forEach(b=>b.onclick=()=>showScreen('menu'));
+$('pauseButton').onclick=togglePause;$('resumeButton').onclick=togglePause;$('saveButton').onclick=()=>{save();toast('Oyun kaydedildi');togglePause()};$('menuButton').onclick=()=>{save();paused=false;mode='menu';showScreen('menu')};$('endingButton').onclick=()=>{if(player.hp<=0)startLevel(level);else if(level===11){chapterCards();showScreen('chapters');mode='menu'}else startLevel(level+1)};$('endingMenuButton').onclick=()=>{mode='menu';showScreen('menu')};$('skipButton').onclick=skipCut;$('cutscene').addEventListener('pointerdown',e=>{if(e.target.id!=='skipButton'&&mode==='cutscene')nextCut()});
+$('soundToggle').onchange=e=>settings.sound=e.target.checked;$('shakeToggle').onchange=e=>settings.shake=e.target.checked;$('rainToggle').onchange=e=>{$('rain').style.display=e.target.checked?'':'none';settings.rain=e.target.checked};
+addEventListener('keydown',e=>{const k=e.key.toLowerCase();keys[k]=true;if(['arrowup','arrowdown','arrowleft','arrowright',' '].includes(k))e.preventDefault();if(e.repeat)return;if(mode==='cutscene'&&(k==='enter'||k===' ')){nextCut();return}if(k==='escape')togglePause();if(k==='e')interact();if(k==='h')heal()});addEventListener('keyup',e=>keys[e.key.toLowerCase()]=false);addEventListener('blur',()=>{keys={};shootHeld=false;runHeld=false});
+canvas.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse')return;const r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;mouse.seen=true});canvas.addEventListener('pointerdown',e=>{if(e.pointerType==='mouse'&&e.button===0){const r=canvas.getBoundingClientRect();mouse.x=e.clientX-r.left;mouse.y=e.clientY-r.top;mouse.seen=true;shootHeld=true}});addEventListener('pointerup',e=>{if(e.pointerType==='mouse')shootHeld=false});
+const stick=$('joystick'),knob=$('knob');let stickId=null;function stickMove(e){const r=stick.getBoundingClientRect(),max=r.width*.3;let x=e.clientX-r.left-r.width/2,y=e.clientY-r.top-r.height/2;const len=Math.hypot(x,y);if(len>max){x=x/len*max;y=y/len*max}joy.x=x/max;joy.y=y/max;knob.style.transform=`translate(${x}px,${y}px)`}stick.addEventListener('pointerdown',e=>{e.preventDefault();stickId=e.pointerId;stick.setPointerCapture(e.pointerId);stickMove(e)});stick.addEventListener('pointermove',e=>{if(stickId===e.pointerId)stickMove(e)});function stickStop(e){if(stickId!==e.pointerId)return;stickId=null;joy={x:0,y:0};knob.style.transform='translate(0,0)'}stick.addEventListener('pointerup',stickStop);stick.addEventListener('pointercancel',stickStop);
+function hold(id,start,end){const b=$(id);b.addEventListener('pointerdown',e=>{e.preventDefault();b.setPointerCapture(e.pointerId);start()});['pointerup','pointercancel','lostpointercapture'].forEach(n=>b.addEventListener(n,end))}hold('fireButton',()=>shootHeld=true,()=>shootHeld=false);hold('runButton',()=>runHeld=true,()=>runHeld=false);$('useButton').onclick=interact;$('healButton').onclick=heal;
+loadSave();showScreen('menu');requestAnimationFrame(loop);
+</script></body></html>
